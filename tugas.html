@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kalkulator by Rifki - Tugas JS</title>
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <style>
+    body {
+        background: url('bacround web.jpg') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center; 
+        align-items: center;  
+        height: 100vh;
+        margin: 0;
+    }
+        .container { margin-top: 0; }
+        
+        .calc-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 0;
+            overflow: hidden;
+            border: none;
+        }
+
+        .calc-header {
+            background: #4e73df;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .calc-body { padding: 30px; }
+
+        .form-control {
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #4e73df;
+            box-shadow: none;
+        }
+
+        .btn-calc {
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: none;
+            color: white;
+
+            background: linear-gradient(135deg, #6a5af9, #8b5cf6);
+            box-shadow: 0 4px 12px rgba(106, 90, 249, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-calc:hover {
+            background: linear-gradient(135deg, #5a4ae3, #7c3aed);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(106, 90, 249, 0.5);
+        }
+
+        .btn-calc:active {
+            transform: scale(0.95);
+        }
+        .result-box {
+            background: #f8f9fc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px dashed #4e73df;
+        }
+
+        #hasil {
+            font-size: 32px;
+            font-weight: 800;
+            color: #4e73df;
+            margin: 0;
+        }
+
+        label { color: #5a5c69; font-weight: 600; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+            <div class="calc-card">
+                <div class="calc-header">
+                    KALKULATOR WEB
+                </div>
+                
+                <div class="calc-body">
+                    <div class="form-group">
+                        <label>Nilai Pertama</label>
+                        <input type="number" id="n1" class="form-control" placeholder="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Nilai Kedua</label>
+                        <input type="number" id="n2" class="form-control" placeholder="0">
+                    </div>
+
+                    <label>Pilih Operasi</label>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <button title="Tambah" class="btn btn-block btn-calc btn-plus" onclick="hitung('+')">+</button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button title="Kurang" class="btn btn-block btn-calc btn-minus" onclick="hitung('-')">−</button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button title="Kali" class="btn btn-block btn-calc btn-kali" onclick="hitung('*')">×</button>
+                        </div>
+                        <div class="col-xs-3">
+                            <button title="Bagi" class="btn btn-block btn-calc btn-bagi" onclick="hitung('/')">÷</button>
+                        </div>
+                    </div>
+
+                    <div class="result-box text-center">
+                        <small style="color: #858796;">HASIL AKHIR</small>
+                        <p id="hasil">0</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center" style="margin-top: 15px; color: #858796; font-size: 12px;">
+                &copy; Rifki Maulana 2026
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function hitung(op) {
+        const v1 = parseFloat(document.getElementById('n1').value);
+        const v2 = parseFloat(document.getElementById('n2').value);
+        const display = document.getElementById('hasil');
+
+        if (isNaN(v1) || isNaN(v2)) {
+            alert("Mohon isi kedua nilai angka!");
+            return;
+        }
+
+        let res = 0;
+        switch(op) {
+            case '+': res = v1 + v2; break;
+            case '-': res = v1 - v2; break;
+            case '*': res = v1 * v2; break;
+            case '/': 
+                res = (v2 !== 0) ? (v1 / v2).toFixed(2) : "Error"; 
+                break;
+        }
+
+        display.innerHTML = res;
+        display.style.transform = "scale(1.1)";
+        setTimeout(() => { display.style.transform = "scale(1)"; }, 200);
+    }
+</script>
+
+</body>
+</html>
